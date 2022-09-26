@@ -1,0 +1,83 @@
+// ----Roman to Integer ---- //
+class Solution {
+    public int romanToInt(String s) {
+	int total = 0;
+	char[] chars = s.toCharArray();
+
+	for (int i = 0; i < chars.length; i++) {
+		char previous = 0;
+
+		if (i != 0) {
+			previous = chars[i-1];
+		}
+
+		char next = 0;
+
+		if (i < chars.length - 1) {
+			next = chars[i+1];
+		}
+
+		switch (chars[i]) {
+			case 'I':
+				if (next == 'V') {
+					total += 4;
+				} else if ( next == 'X') {
+					total += 9;
+				} else {
+					total += 1;
+				}
+				break;
+			case 'V':
+				if (previous == 'I') {
+					continue;
+				}
+				total += 5;
+				break;
+			case 'X':
+				if (previous == 'I') {
+					continue;
+				}
+				if (next == 'L') {
+					total += 40;
+				} else if (next == 'C') {
+					total += 90;
+				} else {
+					total += 10;
+				}
+				break;
+			case 'L':
+				if (previous == 'X') {
+					continue;
+				}
+				total += 50;
+				break;
+			case 'C':
+				if (previous == 'X') {
+					continue;
+				}
+				if (next == 'D') {
+					total += 400;
+				} else if (next == 'M') {
+					total += 900;
+				} else {
+					total += 100;
+				}
+				break;
+			case 'D':
+				if (previous == 'C') {
+					continue;
+				}
+				total += 500;
+				break;
+			case 'M':
+				if (previous == 'C') {
+					continue;
+				}
+				total += 1000;
+				break;
+		}
+
+	}
+	return total; 
+}
+}
